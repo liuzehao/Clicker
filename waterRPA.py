@@ -3,16 +3,15 @@ import time
 import xlrd
 import pyperclip
 
-#定义鼠标事件
 
-#pyautogui库其他用法 https://blog.csdn.net/qingfengxd1/article/details/108270159
+#pyautogui https://blog.csdn.net/qingfengxd1/article/details/108270159
 
 def mouseClick(clickTimes,lOrR,img,reTry):
     if reTry == 1:
         while True:
             location=pyautogui.locateCenterOnScreen(img,confidence=0.9)
             if location is not None:
-                pyautogui.click(location.x,location.y,clicks=clickTimes,interval=0.2,duration=0.2,button=lOrR)
+                pyautogui.click(location.x/2,location.y/2,clicks=clickTimes,interval=0.2,duration=0.2,button=lOrR)
                 break
             print("未找到匹配图片,0.1秒后重试")
             time.sleep(0.1)
@@ -20,19 +19,17 @@ def mouseClick(clickTimes,lOrR,img,reTry):
         while True:
             location=pyautogui.locateCenterOnScreen(img,confidence=0.9)
             if location is not None:
-                pyautogui.click(location.x,location.y,clicks=clickTimes,interval=0.2,duration=0.2,button=lOrR)
+                pyautogui.click(location.x/2,location.y/2,clicks=clickTimes,interval=0.2,duration=0.2,button=lOrR)
             time.sleep(0.1)
     elif reTry > 1:
         i = 1
         while i < reTry + 1:
             location=pyautogui.locateCenterOnScreen(img,confidence=0.9)
             if location is not None:
-                pyautogui.click(location.x,location.y,clicks=clickTimes,interval=0.2,duration=0.2,button=lOrR)
+                pyautogui.click(location.x/2,location.y/2,clicks=clickTimes,interval=0.2,duration=0.2,button=lOrR)
                 print("重复")
                 i += 1
             time.sleep(0.1)
-
-
 
 
 # 数据检查
@@ -144,11 +141,11 @@ if __name__ == '__main__':
     wb = xlrd.open_workbook(filename=file)
     #通过索引获取表格sheet页
     sheet1 = wb.sheet_by_index(0)
-    print('欢迎使用送给小宝贝的小工具~')
     #数据检查
     checkCmd = dataCheck(sheet1)
     if checkCmd:
-        key=input('选择功能: 1.做一次 2.循环 \n')
+        # key=input('选择功能: 1.做一次 2.循环 \n')
+        key='1'
         if key=='1':
             #循环拿出每一行指令
             mainWork(sheet1)
